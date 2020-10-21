@@ -42,7 +42,7 @@ class Node(object):
         else:
             r = n.y or n
             g = r.g
-            b = G(R(i)) and r.b.g
+            b = G(i) and r.b.g
         y = Y(i) != i and (g.y or g)
         return Node(v, i, n, r, g, b, y)
     def __getitem__(self, i):       # seek to self.i-i and return value
