@@ -10,3 +10,5 @@ See [this blog post](https://medium.com/p/a607d06234e0).
 - [rainbowList.py](./rainbowList.py): Original implementation.
 - [rainbowList_noY.py](./rainbowList_noY.py): Optimized to use only 3 shortcuts per node.
 - [rainbowList.ipynb](./rainbowList.ipynb): Jupyter notebook for experiments/diagrams.
+- [rainbow_list/src/main.rs](./rainbow_list/src/main.rs): Rust implementation
+    - Based heavily on: https://rust-unofficial.github.io/too-many-lists

@@ -1,3 +1,10 @@
+
+### Rust
+
+rainbow_list/src/main
+
+### Python
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
