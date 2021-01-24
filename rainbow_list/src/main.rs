@@ -139,9 +139,10 @@ impl<T> RList<T> {
     }
 }
 
-// impl<T> Index<Ind> for RList<T> {
-//     type Output = Option<&T>;   // FIXME: the 
 
+// impl<T> Index<Ind> for RList<T> {
+//     type Output = Option<&T>;
+//     // FIXME: self must outlive the output
 //     fn index(&self, j: Ind) -> &Self::Output { 
 //         let ind = i_(&self.head) - j;
 //         let sought = self.seek(ind);
