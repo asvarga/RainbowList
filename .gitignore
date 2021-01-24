@@ -3,6 +3,10 @@
 
 rainbow_list/src/main
 
+### VS Code
+
+.vscode/
+
 ### Python
 
 # Byte-compiled / optimized / DLL files

@@ -1,6 +1,6 @@
 
 use std::cmp::Ordering;
-use std::ops::Index;
+// use std::ops::Index;
 use std::rc::Rc;
 
 ////
@@ -115,64 +115,37 @@ impl<T> RList<T> {
         if ind <= 0 { return None }
 
         match i_(&self.head).cmp(&ind) {
-            Ordering::Greater => None,
+            Ordering::Less => None,
             Ordering::Equal => self.head.clone(),
-            Ordering::Less => { 
+            Ordering::Greater => { 
                 let mut head: Link<T> = self.head.clone();
                 let mut i: Ind = i_(&head);
                 while i > ind {
+                    println!("i: {:?}", i);
                     if      g_(i) >= ind && g_(g_(i)) >= g_(ind) { head = head.and_then(|x| x.g.clone()) }
                     else if b_(i) >= ind && g_(b_(i)) >= g_(ind) { head = head.and_then(|x| x.b.clone()) }
                     else if r_(i) >= ind && g_(r_(i)) >= g_(ind) { head = head.and_then(|x| x.r.clone()) } //.or_else(|| x.n.clone())) }
                     else { head = head.and_then(|x| x.g.clone()) }
                     i = i_(&head)
                 }
+                println!("i: {:?}", i);
                 head
             },
         }
     }
 
-    pub fn seek(&self, ind: Ind) -> Self { Self { head: self.seek_link(ind) } }
-
-        // if ind == 0 { return Self::NULL }
-
-        // match i_(&self.head).cmp(&ind) {
-        //     Ordering::Greater => Self::NULL,
-        //     Ordering::Equal => self.clone(),
-        //     Ordering::Less => { 
-        //         // let mut head: Node<T> = *self.head.unwrap();
-        //         let mut head: Link<T> = self.head.clone();
-        //         let mut i: Ind = i_(&head);
-        //         while i > ind {
-        //             if      g_(i) >= ind && g_(g_(i)) >= g_(ind) { head = head.and_then(|x| x.g.clone()) }
-        //             else if b_(i) >= ind && g_(b_(i)) >= g_(ind) { head = head.and_then(|x| x.b.clone()) }
-        //             else if r_(i) >= ind && g_(r_(i)) >= g_(ind) { head = head.and_then(|x| x.r.clone()) } //.or_else(|| x.n.clone())) }
-        //             else { head = head.and_then(|x| x.g.clone()) }
-        //             i = i_(&head)
-        //         }
-        //         Self { head }
-        //     },
-        // }
-    // }
-
-    // pub fn head(&self) -> Option<&T> {
-    //     self.head.as_ref().map(|node| &node.v)
-    // }
-
-    pub fn index(&self, ind: Ind) -> Option<&T> { self.seek_link(ind).map(|x| &x.v) }
-
-    // pub fn index(&self, ind: Ind) -> Option<&T> { self.seek(ind).head() }
+    pub fn seek(&self, ind: Ind) -> Self { 
+        Self { head: self.seek_link(ind) } 
+    }
 }
 
 // impl<T> Index<Ind> for RList<T> {
-//     type Output = Option<T>;
+//     type Output = Option<&T>;   // FIXME: the 
 
-//     fn index(&self, ind: Ind) -> &Self::Output { 
-//         self.index(ind) 
-//         // &self.head.map(|x| x.v)
-//         // let sought: Self = self.seek(ind);
-//         // sought.head.map(|x| x.v)
-//         // &self.seek(ind).head.clone().map(|x| x.v)
+//     fn index(&self, j: Ind) -> &Self::Output { 
+//         let ind = i_(&self.head) - j;
+//         let sought = self.seek(ind);
+//         &sought.head()
 //     }
 // }
 
@@ -207,18 +180,9 @@ impl<'a, T> Iterator for Iter<'a, T> {
 ////
 
 fn main() {
-    println!("r_(12): {}", r_(12));
-    println!("g_(12): {}", g_(12));
-    println!("b_(12): {}", b_(12));
-
-    let list = RList::new().append(1).append(2).append(3);
-    println!("list: {:?}", list);
+    let mut list = RList::new();
+    for _ in 0..63 {
+        list = list.append("hi")
+    }
+    list.seek(3);
 }
-
-
-/*
-
-TODO:
-- use cargo to run/test
-
-*/
