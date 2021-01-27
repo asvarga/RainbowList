@@ -137,6 +137,20 @@ impl<T> RList<T> {
     pub fn seek(&self, ind: Ind) -> Self { 
         Self { head: self.seek_link(ind) } 
     }
+
+    pub fn slice(&self, i: Ind) -> Self {
+        let ind = i_(&self.head) - i;
+        Self { head: self.seek_link(ind) } 
+    }
+
+    // pub fn get(&self, i: Ind) -> Option<&T> {
+    //     // let ind = i_(&self.head) - i;
+    //     // let sought = self.seek(ind);
+    //     // sought.head()
+    //     // sought.head.as_ref().map(|x| x.v)
+    //     let sliced = self.slice(i);
+    //     sliced.head()
+    // }
 }
 
 
@@ -185,5 +199,6 @@ fn main() {
     for _ in 0..63 {
         list = list.append("hi")
     }
-    list.seek(3);
+    // list.seek(3);
+    list.slice(60);
 }
