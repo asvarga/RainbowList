@@ -15,6 +15,4 @@ See [this blog post](https://medium.com/p/a607d06234e0).
 
 ### TODO
 
-- implement indexing
-- improve code like `n.as_ref().and_then(|x| x.b.clone())`
-    - use a macro or implementation?
+- shorten code like `n.as_ref().and_then(|x| x.b.clone())`
